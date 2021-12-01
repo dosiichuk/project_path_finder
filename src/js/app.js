@@ -24,12 +24,8 @@ class App {
       link.addEventListener('click', function(event){
         const clickedElement = this;
         event.preventDefault();
-        /* Get page id from fref attribute */
         const id = clickedElement.getAttribute('href').replace('#', '');
-        console.log(id);
-        /* Run activatePage function with the retrieved id */
         thisApp.activatePage(id);
-        /* change url hash */
         window.location.hash = '#/'+ id;
       });
     }

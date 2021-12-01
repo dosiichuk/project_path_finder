@@ -27,13 +27,19 @@ html {
 }
 
 body{
-    background-color: $color-background-dark;
-    filter: blur(50%);
+  background-color: $color-background-dark;
+  filter: blur(50%);
 }
 
-.button-mode{
-  padding: 0.5rem 1.5rem;
+.button-stage{
+  margin: 3rem auto;
+  text-decoration: none;
+  padding: 1rem 2.5rem;
   background-color: $color-primary;
+  color: $color-text-primary;
+  font-size: 2rem;
+  font-family: $font-main;
+  font-weight: $font-regular;
 }
 
 .hidden{

@@ -31,41 +31,41 @@
     padding: 0;
 
     li{
-        padding: 0;
+      padding: 0;
     }
 
     &__link{
-        text-decoration: none;
-        font-family: $font-main;
-        color: $color-text-primary;
-        font-weight: $font-regular;
-        font-size: 1.75rem;
-        @media (max-width: $size-medium-3) {
-            font-size: 3rem;
-        }
+      text-decoration: none;
+      font-family: $font-main;
+      color: $color-text-primary;
+      font-weight: $font-regular;
+      font-size: 2.35rem;
+      @media (max-width: $size-medium-3) {
+        font-size: 3rem;
+      }
     }
   }
 
   &__main-header{
-      position: absolute;
-      @include center(40%, 50%);
+    position: absolute;
+    @include center(40%, 50%);
   }
 }
 
 #pages{
-    background: rgb(0,0,0);
-    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.75) 85%, rgba(0,0,0,0) 100%);
-    transform: translateY(-10rem);
-    @media (max-width: $size-medium-1) {
-        margin-top: -5vh;
-    }
+  background: rgb(0,0,0);
+  background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.75) 85%, rgba(0,0,0,0) 100%);
+  transform: translateY(-10rem);
+  @media (max-width: $size-medium-1) {
+    margin-top: -5vh;
+  }
 }
 
 .copyright{
-    margin: 2rem auto;
-    color: $color-text-secondary;
-    font-family: $font-main;
-    font-weight: $font-regular;
-    text-align: center;
-    font-size: 1.5rem;
+  margin: 2rem auto;
+  color: $color-text-secondary;
+  font-family: $font-main;
+  font-weight: $font-regular;
+  text-align: center;
+  font-size: 1.5rem;
 }

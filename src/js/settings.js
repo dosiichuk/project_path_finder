@@ -10,6 +10,7 @@ export const select = {
   },
   all: {
     navlinks: '.nav__link',
+    cells: '.cell',
   },
 };
 export const templates = {
@@ -20,4 +21,28 @@ export const templates = {
 export const classNames = {
   active: 'active',
   hidden: 'hidden',
+  selected: 'selected',
+  available: 'available',
+  stageButton: 'button-stage',
+};
+
+export const stages = {
+  endDrawing: {
+    name: 'End drawing',
+    code: 1,
+    title: 'DRAW ROUTES',
+    buttonText: 'End drawing',
+  },
+  compute: {
+    name: 'Compute',
+    code: 2,
+    title: 'PICK START AND FINISH',
+    buttonText: 'COMPUTE',
+  },
+  getResult: {
+    name: 'START AGAIN',
+    code: 3,
+    title: 'THE BEST ROUTE IS...',
+    buttonText: 'START AGAIN',
+  },
 };
