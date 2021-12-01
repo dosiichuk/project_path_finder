@@ -1,0 +1,30 @@
+.main-header{
+  font-family: $font-main;
+  font-weight: $font-black;
+  font-size: $font-size-main-header;
+  letter-spacing: 0.75rem;
+  text-transform: uppercase;
+}
+
+.subheader{
+    font-family: $font-main;
+    font-weight: $font-semi-bold;
+    letter-spacing: 0.25rem;
+    text-transform: uppercase;
+}
+
+.section-title{
+    font-family: $font-main;
+    font-weight: $font-bold;
+    text-transform: uppercase;
+}
+
+.section-subtitle{
+    font-family: $font-main;
+    font-weight: $font-regular;
+}
+
+.copyright-note{
+    font-family: $font-main;
+    font-weight: $font-regular;
+}
