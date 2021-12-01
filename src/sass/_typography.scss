@@ -1,30 +1,49 @@
+h1{
+    margin: 0;
+}
+
 .main-header{
   font-family: $font-main;
   font-weight: $font-black;
   font-size: $font-size-main-header;
-  letter-spacing: 0.75rem;
+  letter-spacing: 1.75rem;
   text-transform: uppercase;
+  color: $color-text-primary;
+  margin: 0;
+  text-align: right;
 }
 
 .subheader{
-    font-family: $font-main;
-    font-weight: $font-semi-bold;
-    letter-spacing: 0.25rem;
-    text-transform: uppercase;
+  font-family: $font-main;
+  font-weight: $font-semi-bold;
+  letter-spacing: 0.5rem;
+  text-transform: uppercase;
+  color: $color-text-primary;
+  text-align: right;
+  font-size: $font-size-subheader;
 }
 
 .section-title{
-    font-family: $font-main;
-    font-weight: $font-bold;
-    text-transform: uppercase;
+  font-family: $font-main;
+  font-weight: $font-bold;
+  text-transform: uppercase;
+  color: $color-text-primary;
+  font-size: $font-size-section-title;
+  letter-spacing: 0.5rem;
+  @media (max-width: $size-small) {
+    font-size: 2.5rem;
+    letter-spacing: 0.5rem;
+}
 }
 
 .section-subtitle{
-    font-family: $font-main;
-    font-weight: $font-regular;
+  font-family: $font-main;
+  font-weight: $font-regular;
+  color: $color-text-primary;
+  font-size: $font-size-section-subtitle;
 }
 
 .copyright-note{
-    font-family: $font-main;
-    font-weight: $font-regular;
+  font-family: $font-main;
+  font-weight: $font-regular;
 }

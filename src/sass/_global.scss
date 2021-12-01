@@ -1,4 +1,45 @@
+html {
+  font-size: 100%; // 1rem = 16px
+  @media (max-width: $size-large-1) {
+    font-size: 80%;
+  }
+  @media (max-width: $size-large-2) {
+    font-size: 65%;
+  }
+  @media (max-width: $size-medium-1) {
+    font-size: 55%;
+  }
+  @media (max-width: $size-medium-2) {
+    font-size: 45%;
+  }
+  @media (max-width: $size-medium-3) {
+    font-size: 35%;
+  }
+  @media (max-width: $size-small) {
+    font-size: 25%;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body{
+    background-color: $color-background-dark;
+    filter: blur(50%);
+}
+
 .button-mode{
-    padding: 0.5rem 1.5rem;
-    background-color: $color-primary;
+  padding: 0.5rem 1.5rem;
+  background-color: $color-primary;
+}
+
+.hidden{
+  display: none;
+}
+
+.active{
+  display: initial;
 }

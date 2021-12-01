@@ -14,20 +14,61 @@
 </head>
 
 <body>
+    <div class="header">
+        <div class="container header__navbar">
+            <ul class="nav">
+                <li>
+                    <a class="nav__link" href="#home">ABOUT</a>
+                </li>
+                <li>
+                    <a class="nav__link" href="#pathfinder">FINDER</a>
+                </li>
+            </ul>
+        </div>
+        <div class="header__main-header">
+            <h1 class="main-header">PATHFINDER</h1>
+            <h2 class="subheader">FOR TRAVELLERS</h2>
+        </div>
+    </div>
+
     <div id="pages">
         <section id="home">
             <div id="home-container" class="home-wrapper container"></div>
         </section>
         <section id="pathfinder">
-            <div class="pathfinder-wrapper container"></div>
+            <div id="pathfinder-container" class="pathfinder-wrapper container"></div>
         </section>
+    </div>
+    <div class="copyright">
+        All rights reserved
     </div>
 
 
     <script id="template-home" type="text/x-handlebars-template">
-        <div class="container">
-            <h1 class="main-header">Hello</h1>
-        </div>
+        <section class="banner banner--1">
+            <img src="./images/1.jpg" alt="travel" class="banner__image">
+            <div class="banner__text">
+                <h1 class="section-title">PLAN YOUR JOURNEYS</h1>
+                <h2 class="section-subtitle">Pick attractions and book hotels</h2>
+            </div>
+        </section>
+        <section class="banner banner--2">
+            <img src="./images/2.jpg" alt="boredom" class="banner__image">
+            <div class="banner__text">
+                <h1 class="section-title">MINIMALIZE BOREDOM</h1>
+                <h2 class="section-subtitle">Pick routes that are short and attractive</h2>
+            </div>
+        </section>
+    </script>
+
+    <script id="template-pathfinder" type="text/x-handlebars-template">
+        <section class="pathfinder">
+            {{#each cells}}
+            <div class="cell" data-row="{{row}}" data-column="{{column}}">
+                &nbsp;
+            </div>
+            {{/each}}
+        </section>
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>

@@ -8,7 +8,10 @@ $font-semi-bold: 600;
 $font-regular: 400;
 
 //font sizes
-$font-size-main-header: 7rem;
+$font-size-main-header: 6rem;
+$font-size-subheader: 2rem;
+$font-size-section-title: 3rem;
+$font-size-section-subtitle: 2.5rem;
 
 //colors
 $color-text-primary: white;
@@ -17,4 +20,14 @@ $color-background-primary: black;
 $color-primary: #E74C3C;
 $color-start: #2ECC71;
 $color-end: #C24E00;
+$color-background-dark: black;
+$color-background-dark-hazy: rgba(29, 26, 26, 0.404);
+
+//responsive breakpoints
+$size-large-1: 100rem;
+$size-large-2: 80rem;
+$size-medium-1: 67.5rem;
+$size-medium-2: 53.74rem;
+$size-medium-3: 45rem;
+$size-small: 30rem;
 
