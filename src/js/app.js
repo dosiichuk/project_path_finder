@@ -63,6 +63,7 @@ class App {
   activateChangeStageButton(){
     this.changeStageButton.addEventListener('click', (event) => {
       console.log('switch was clicked', event.target);
+      event.preventDefault();
       if(this.stage === 1){
         this.stage += 1;
         this.renderPathfinder();

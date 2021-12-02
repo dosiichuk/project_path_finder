@@ -17,8 +17,9 @@ class Modal{
   initActions(){
     const modalClose = document.querySelector(select.modalClose);
     const modalContainer = document.querySelector(select.modalContainer);
-    modalClose.addEventListener('click', () => {
-      modalContainer.classList.add(classNames.hidden);      
+    modalClose.addEventListener('click', (event) => {
+      event.preventDefault();
+      modalContainer.classList.toggle(classNames.hidden);      
     });
   }
 }
