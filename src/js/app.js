@@ -3,6 +3,7 @@ import Homepage from './components/Homepage.js';
 import Pathfinder from './components/Pathfinder.js';
 import Pathcomputer from './components/Pathcomputer.js';
 
+
 class App {
   constructor(){
     this.stage = 1; 

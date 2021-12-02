@@ -2,11 +2,13 @@ export const select = {
   templateOf:{
     homePage: '#template-home',
     pathfinder: '#template-pathfinder',
+    modal: '#template-modal',
   },
   wrapperOf:{
     homePage: '.home-wrapper',
     pathfinder: '.pathfinder-wrapper',
     pages: '#pages',
+    modal:'.modal-wrapper',
   },
   all: {
     navlinks: '.nav__link',
@@ -17,10 +19,13 @@ export const select = {
   pathfinderTitle: '.pathfinder-title',
   start: '.start',
   finish: '.finish',
+  modalClose: '.modal__close',
+  modalContainer: '.modal__container',
 };
 export const templates = {
   homePage: Handlebars.compile(document.querySelector(select.templateOf.homePage).innerHTML),
   pathfinder: Handlebars.compile(document.querySelector(select.templateOf.pathfinder).innerHTML),
+  modal: Handlebars.compile(document.querySelector(select.templateOf.modal).innerHTML),
 };
 
 export const classNames = {
@@ -32,6 +37,8 @@ export const classNames = {
   start: 'start',
   finish: 'finish',
   visited: 'visited',
+  shortest: 'shortest',
+  modalClose: 'modal-close',
 };
 
 export const stages = {

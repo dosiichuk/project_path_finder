@@ -1,0 +1,42 @@
+.modal{
+    &__container{
+        position: absolute;
+        @include center(50vh, 50vw);
+        background-color: rgba(black, 0.8);
+        height: 100%;
+        width: 100%;
+    }
+    &__content{
+        position: absolute;
+        @include center(45vh, 50vw);
+        background-color: $color-text-primary;
+        height: 25vh;
+        width: 30vw;
+        color: $color-text-secondary;
+        padding: 6rem 4rem;
+        
+        .section-title{
+            color: $color-background-primary;
+        }
+
+        .section-subtitle{
+            color: $color-background-primary;
+        }
+    }
+
+    &__span{
+        font-weight: $font-bold;
+        color: $color-start;
+    }
+
+    &__close{
+        position: absolute;
+        @include center(20%, 85%);
+        border: none;
+        background-color: transparent;
+        height: 10%;
+        width: 10%;
+        font-size: 3rem;
+        font-family: $font-main;
+    }
+}
