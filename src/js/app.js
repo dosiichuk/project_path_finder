@@ -49,6 +49,8 @@ class App {
       new Pathfinder(this.dom.pathfinderWrapper);
     }else if(this.stage === 2){
       new Pathcomputer(this.stage);
+    }else if(this.stage === 3){
+      new Pathcomputer(this.stage);
     }
     
   }
@@ -64,6 +66,11 @@ class App {
         this.stage += 1;
         this.renderPathfinder();
         this.updateAppView(this.stage);
+        console.log('current state', this.stage);
+      }else if(this.stage === 2){
+        this.stage += 1;
+        this.updateAppView(this.stage);
+        this.renderPathfinder();
       }
     });
   }
@@ -72,6 +79,9 @@ class App {
       console.log('to update', document.querySelector(select.pathfinderTitle).innerHTML);
       document.querySelector(select.pathfinderTitle).innerHTML = stages[2].title;
       document.querySelector(select.changeStageButton).innerHTML = stages[2].buttonText;
+    }else if(stage === 3){
+      document.querySelector(select.pathfinderTitle).innerHTML = stages[3].title;
+      document.querySelector(select.changeStageButton).innerHTML = stages[3].buttonText;
     }
   }
 }

@@ -1,5 +1,6 @@
 import {templates, select, classNames, stages} from '../settings.js';
 import {prepareCellData} from '../utils.js';
+import {prepareAdjacentCells} from '../utils.js';
 
 class Pathfinder{
   constructor(wrapperElement){
@@ -44,12 +45,12 @@ class Pathfinder{
           event.target.classList.toggle(classNames.selected);
           this.modifyAdjacentCells(event.target.dataset, 'add');
         }else if(event.target.classList.contains(classNames.selected)){
-          if(thisPathfinder.checkForBreak(thisPathfinder.prepareAdjacentCells(event.target.dataset))){
+          if(thisPathfinder.checkForBreak(prepareAdjacentCells(event.target.dataset))){
             alert('You cannot remove this cell, because it will create a break in the path');
           }else{
             event.target.classList.toggle(classNames.selected);
             this.modifyAdjacentCells(event.target.dataset, 'remove');
-            this.prepareAdjacentCells(event.target.dataset)[1].forEach(cell => {
+            prepareAdjacentCells(event.target.dataset)[1].forEach(cell => {
               if(cell.classList.contains(classNames.selected)){
                 this.modifyAdjacentCells(cell.dataset, 'add');
               }
@@ -59,24 +60,10 @@ class Pathfinder{
       });
     }
   }
-  prepareAdjacentCells(dataset){
-    let row = parseInt(dataset.row);
-    let column = parseInt(dataset.column);
-    let cellAboveTheSelectedCell = document.querySelector(`.cell[data-row="${row - 1}"][data-column="${column}"]`);
-    let cellBelowTheSelectedCell = document.querySelector(`.cell[data-row="${row + 1}"][data-column="${column}"]`);
-    let cellRightOfTheSelectedCell = document.querySelector(`.cell[data-row="${row}"][data-column="${column + 1}"]`);
-    let cellLeftOfTheSelectedCell = document.querySelector(`.cell[data-row="${row}"][data-column="${column - 1}"]`);
-    let cellTopLeft = document.querySelector(`.cell[data-row="${row - 1}"][data-column="${column-1}"]`);
-    let cellTopRight = document.querySelector(`.cell[data-row="${row - 1}"][data-column="${column + 1}"]`);
-    let cellBottomRight = document.querySelector(`.cell[data-row="${row + 1}"][data-column="${column + 1}"]`);
-    let cellBottomLeft = document.querySelector(`.cell[data-row="${row + 1}"][data-column="${column - 1}"]`);
-    const adjacentCells = [cellAboveTheSelectedCell, cellBelowTheSelectedCell, cellRightOfTheSelectedCell, cellLeftOfTheSelectedCell];
-    const cornerCells = [cellTopLeft, cellTopRight, cellBottomRight, cellBottomLeft];
-    return [adjacentCells, cornerCells];
-  }
+  
   modifyAdjacentCells(dataset, operation){
     const thisPathfinder = this;
-    const [adjacentCells] = thisPathfinder.prepareAdjacentCells(dataset);
+    const [adjacentCells] = prepareAdjacentCells(dataset);
     if(operation === 'add'){
       adjacentCells.forEach(cell => {
         if(cell && !cell.classList.contains(classNames.selected) && !cell.classList.contains(classNames.available)){

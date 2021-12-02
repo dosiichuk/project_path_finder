@@ -15,6 +15,8 @@ export const select = {
   changeStageButton: '.button-stage',
   pathfinderWrapper: '.pathfinder',
   pathfinderTitle: '.pathfinder-title',
+  start: '.start',
+  finish: '.finish',
 };
 export const templates = {
   homePage: Handlebars.compile(document.querySelector(select.templateOf.homePage).innerHTML),
@@ -27,6 +29,9 @@ export const classNames = {
   selected: 'selected',
   available: 'available',
   stageButton: 'button-stage',
+  start: 'start',
+  finish: 'finish',
+  visited: 'visited',
 };
 
 export const stages = {

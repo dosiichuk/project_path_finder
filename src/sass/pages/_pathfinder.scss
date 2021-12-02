@@ -30,6 +30,13 @@
     &.available{
       background-color: rgba(255, 255, 255, 0.4);
     }
+
+    &.start{
+      background-color: greenyellow;
+    }
+    &.finish{
+      background-color: rgb(58, 16, 3);
+    }
   }
 }
 
