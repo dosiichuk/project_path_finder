@@ -12,6 +12,9 @@ export const select = {
     navlinks: '.nav__link',
     cells: '.cell',
   },
+  changeStageButton: '.button-stage',
+  pathfinderWrapper: '.pathfinder',
+  pathfinderTitle: '.pathfinder-title',
 };
 export const templates = {
   homePage: Handlebars.compile(document.querySelector(select.templateOf.homePage).innerHTML),
@@ -27,19 +30,19 @@ export const classNames = {
 };
 
 export const stages = {
-  endDrawing: {
+  1: {
     name: 'End drawing',
     code: 1,
     title: 'DRAW ROUTES',
     buttonText: 'End drawing',
   },
-  compute: {
+  2: {
     name: 'Compute',
     code: 2,
     title: 'PICK START AND FINISH',
     buttonText: 'COMPUTE',
   },
-  getResult: {
+  3: {
     name: 'START AGAIN',
     code: 3,
     title: 'THE BEST ROUTE IS...',

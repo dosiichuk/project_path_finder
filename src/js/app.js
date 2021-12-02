@@ -1,13 +1,17 @@
-import {classNames, select} from './settings.js';
+import {classNames, select, stages} from './settings.js';
 import Homepage from './components/Homepage.js';
 import Pathfinder from './components/Pathfinder.js';
+import Pathcomputer from './components/Pathcomputer.js';
 
 class App {
   constructor(){
+    this.stage = 1; 
     this.getElements();
     this.renderHomepage();
     this.renderPathfinder();
-    this.findAndActivatePageMatchingHash(this.pageMatchingHash);    
+    this.findAndActivatePageMatchingHash(this.pageMatchingHash);
+    this.changeStageButton = document.querySelector(select.changeStageButton);
+    this.activateChangeStageButton();
   }
   findAndActivatePageMatchingHash(){
     const thisApp = this;
@@ -41,16 +45,35 @@ class App {
     new Homepage(this.dom.homeWrapper);
   }
   renderPathfinder(){
-    new Pathfinder(this.dom.pathfinderWrapper);
+    if(this.stage === 1){
+      new Pathfinder(this.dom.pathfinderWrapper);
+    }else if(this.stage === 2){
+      new Pathcomputer(this.stage);
+    }
+    
   }
   activatePage(pageId){
     for(let page of this.dom.pages){
-      console.log(page);
       page.classList.toggle(classNames.hidden, page.id != pageId);
     }
   }
-
-
+  activateChangeStageButton(){
+    this.changeStageButton.addEventListener('click', (event) => {
+      console.log('switch was clicked', event.target);
+      if(this.stage === 1){
+        this.stage += 1;
+        this.renderPathfinder();
+        this.updateAppView(this.stage);
+      }
+    });
+  }
+  updateAppView(stage){
+    if(stage === 2){
+      console.log('to update', document.querySelector(select.pathfinderTitle).innerHTML);
+      document.querySelector(select.pathfinderTitle).innerHTML = stages[2].title;
+      document.querySelector(select.changeStageButton).innerHTML = stages[2].buttonText;
+    }
+  }
 }
 
 new App();
