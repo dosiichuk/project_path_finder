@@ -82,17 +82,8 @@ class App {
     });
   }
   updateAppView(stage){
-    if(stage === 2){
-      console.log('to update', document.querySelector(select.pathfinderTitle).innerHTML);
-      document.querySelector(select.pathfinderTitle).innerHTML = stages[2].title;
-      document.querySelector(select.changeStageButton).innerHTML = stages[2].buttonText;
-    }else if(stage === 3){
-      document.querySelector(select.pathfinderTitle).innerHTML = stages[3].title;
-      document.querySelector(select.changeStageButton).innerHTML = stages[3].buttonText;
-    }else if(stage === 1){
-      document.querySelector(select.pathfinderTitle).innerHTML = stages[1].title;
-      document.querySelector(select.changeStageButton).innerHTML = stages[1].buttonText;
-    }
+    document.querySelector(select.pathfinderTitle).innerHTML = stages[stage].title;
+    document.querySelector(select.changeStageButton).innerHTML = stages[stage].buttonText;
   }
 }
 

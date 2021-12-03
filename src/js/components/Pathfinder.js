@@ -32,7 +32,8 @@ class Pathfinder{
     for(let cell of thisPathfinder.dom.cells){
       cell.addEventListener('click', (event) => {
         console.log(event.target);
-        if(!thisPathfinder.firstSelectedCell || Array.from(thisPathfinder.dom.cells).filter(cell => cell.classList.contains(classNames.selected)).length == 0){
+        if(!thisPathfinder.firstSelectedCell || 
+            Array.from(thisPathfinder.dom.cells).filter(cell => cell.classList.contains(classNames.selected)).length == 0){
           thisPathfinder.firstSelectedCell = event.target;
           this.selectedCells.push(event.target);
           this.modifyAdjacentCells(event.target.dataset, 'add');

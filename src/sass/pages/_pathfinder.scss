@@ -46,5 +46,11 @@
 }
 
 #pathfinder{
-  @include flex(column, center, center);
+  
+  a{
+    display: block;
+    text-align: center;
+    margin: 3rem auto 0 auto;
+    width: 15rem;
+  }
 }
