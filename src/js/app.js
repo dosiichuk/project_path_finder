@@ -73,6 +73,11 @@ class App {
         this.stage += 1;
         this.updateAppView(this.stage);
         this.renderPathfinder();
+      }else if(this.stage === 3){
+        this.stage = 1;
+        this.updateAppView(this.stage);
+        this.renderPathfinder();
+        console.log(this.changeStageButton);
       }
     });
   }
@@ -84,6 +89,9 @@ class App {
     }else if(stage === 3){
       document.querySelector(select.pathfinderTitle).innerHTML = stages[3].title;
       document.querySelector(select.changeStageButton).innerHTML = stages[3].buttonText;
+    }else if(stage === 1){
+      document.querySelector(select.pathfinderTitle).innerHTML = stages[1].title;
+      document.querySelector(select.changeStageButton).innerHTML = stages[1].buttonText;
     }
   }
 }

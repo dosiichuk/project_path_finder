@@ -65,6 +65,7 @@ class Pathcomputer{
   }
   computePaths(start){
     const thisPathcomputer = this;
+    console.log('start cell', start);
     let currentCell = start;
     if(!currentCell.classList.contains(classNames.finish)){
       currentCell.classList.add(classNames.visited);

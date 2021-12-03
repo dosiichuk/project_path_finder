@@ -15,9 +15,8 @@ class Pathfinder{
   }
   render(wrapperElement){
     const thisPathfinder = this;
-    const buttonText = thisPathfinder.stage.buttonText;
-    console.log(buttonText);
-    const cellData = prepareCellData(buttonText);
+    thisPathfinder.buttonText = thisPathfinder.stage.buttonText;
+    const cellData = prepareCellData(thisPathfinder.buttonText);
     const generatedHtml = templates.pathfinder(cellData);
     thisPathfinder.dom = {};
     thisPathfinder.dom.wrapper = wrapperElement;
@@ -33,7 +32,7 @@ class Pathfinder{
     for(let cell of thisPathfinder.dom.cells){
       cell.addEventListener('click', (event) => {
         console.log(event.target);
-        if(!thisPathfinder.firstSelectedCell){
+        if(!thisPathfinder.firstSelectedCell || Array.from(thisPathfinder.dom.cells).filter(cell => cell.classList.contains(classNames.selected)).length == 0){
           thisPathfinder.firstSelectedCell = event.target;
           this.selectedCells.push(event.target);
           this.modifyAdjacentCells(event.target.dataset, 'add');
