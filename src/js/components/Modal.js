@@ -11,12 +11,13 @@ class Modal{
     const generatedHtml = templates.modal(thisModal.data);
     thisModal.dom = {};
     thisModal.dom.wrapper = wrapperElement;
+    thisModal.dom.wrapper.classList.toggle(classNames.hidden);
     thisModal.dom.wrapper.innerHTML = generatedHtml;
     thisModal.initActions();
   }
   initActions(){
     const modalClose = document.querySelector(select.modalClose);
-    const modalContainer = document.querySelector(select.modalContainer);
+    const modalContainer = document.querySelector(select.wrapperOf.modal);
     modalClose.addEventListener('click', (event) => {
       event.preventDefault();
       modalContainer.classList.toggle(classNames.hidden);      

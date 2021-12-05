@@ -31,7 +31,6 @@ class Pathfinder{
     const thisPathfinder = this;
     for(let cell of thisPathfinder.dom.cells){
       cell.addEventListener('click', (event) => {
-        console.log(event.target);
         if(!thisPathfinder.firstSelectedCell || 
             Array.from(thisPathfinder.dom.cells).filter(cell => cell.classList.contains(classNames.selected)).length == 0){
           thisPathfinder.firstSelectedCell = event.target;
@@ -45,7 +44,10 @@ class Pathfinder{
           event.target.classList.toggle(classNames.selected);
           this.modifyAdjacentCells(event.target.dataset, 'add');
         }else if(event.target.classList.contains(classNames.selected)){
-          if(thisPathfinder.checkForBreak(prepareAdjacentCells(event.target.dataset))){
+          
+          if(thisPathfinder.checkForBreak(prepareAdjacentCells(event.target.dataset)) ||
+          (prepareAdjacentCells(event.target.dataset)[0].map(adjacentCell => thisPathfinder.checkForBreak(prepareAdjacentCells(adjacentCell.dataset))).includes(true) && 
+          prepareAdjacentCells(event.target.dataset)[0].filter(cell => cell.classList.contains(classNames.selected)).length > 1)){
             alert('You cannot remove this cell, because it will create a break in the path');
           }else{
             event.target.classList.toggle(classNames.selected);
@@ -85,6 +87,7 @@ class Pathfinder{
   }
   checkForBreak([adjacentCells, cornerCells]){
     console.log('inside checkforbreask, corner cells', cornerCells);
+    adjacentCells = adjacentCells.filter(cell => cell !== null);
     //this function check whether two of the adjacent cells are selected, while the two remaining are not
     if((adjacentCells[0].classList.contains(classNames.selected) && 
     adjacentCells[1].classList.contains(classNames.selected) && 
@@ -93,8 +96,7 @@ class Pathfinder{
   || (adjacentCells[2].classList.contains(classNames.selected) &&
   adjacentCells[3].classList.contains(classNames.selected) &&
    !adjacentCells[0].classList.contains(classNames.selected) &&
-   !adjacentCells[1].classList.contains(classNames.selected)) ||
-   cornerCells.length == 1){
+   !adjacentCells[1].classList.contains(classNames.selected))){
       return true;
     }else{
       return false;

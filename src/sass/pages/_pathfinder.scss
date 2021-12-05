@@ -22,6 +22,7 @@
     border: 0.15rem solid $color-text-primary;
     height: 4.5rem;
     width: 4.5rem;
+    cursor: pointer;
 
     &.selected{
       background-color: $color-primary;    
@@ -46,7 +47,6 @@
 }
 
 #pathfinder{
-  
   a{
     display: block;
     text-align: center;

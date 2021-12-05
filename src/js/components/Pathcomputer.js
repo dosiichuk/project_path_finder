@@ -1,6 +1,7 @@
 import {classNames, select} from '../settings.js';
-import {prepareAdjacentCells} from '../utils.js';
+// import {prepareAdjacentCells} from '../utils.js';
 import Modal from './Modal.js';
+import {findTheShortestPath} from './FinderFunction.js';
 
 class Pathcomputer{
   constructor(stage){
@@ -8,6 +9,7 @@ class Pathcomputer{
     thisPathcomputer.buttonText = stage.buttonText;
     thisPathcomputer.dom = {};
     thisPathcomputer.paths = [];
+    thisPathcomputer.randomPath = [];
     thisPathcomputer.shortestDistance = false;
     thisPathcomputer.longestDistance = 'NA';
     thisPathcomputer.fullRoute = false;
@@ -30,11 +32,15 @@ class Pathcomputer{
       const markup = Array.from(thisPathcomputer.dom.cells).map(cell => cell.outerHTML).join('');
       thisPathcomputer.dom.wrapper.innerHTML = markup;
     }else if(stage === 3){
-      const start = document.querySelector(select.start);
+      // const start = document.querySelector(select.start);
       //   const finish = document.querySelector(select.finish);
-      thisPathcomputer.computePaths(start);
-      thisPathcomputer.indicateShortestPath(thisPathcomputer.paths);
-      thisPathcomputer.shortestPath.forEach(cell => cell.classList.add(classNames.shortest));
+      // thisPathcomputer.computePaths(start);
+      // thisPathcomputer.generateRandomPath(start);
+      const [matrix, startCoords, finishCoords] = thisPathcomputer.createMatrixRepresentationOfPathFinder();
+      thisPathcomputer.shortestPath = findTheShortestPath(matrix, startCoords, finishCoords);
+      console.log(thisPathcomputer.shortestPath);
+      thisPathcomputer.highlightTheShortestPath(thisPathcomputer.shortestPath);
+      thisPathcomputer.shortestDistance = thisPathcomputer.shortestPath.length - 1;
       thisPathcomputer.fullRoute = document.getElementsByClassName(classNames.selected).length;
       new Modal(document.querySelector(select.wrapperOf.modal), thisPathcomputer.fullRoute, thisPathcomputer.longestDistance, thisPathcomputer.shortestDistance);
     }    
@@ -63,40 +69,95 @@ class Pathcomputer{
       }
     );
   }
-  computePaths(start){
+  // computePaths(start){
+  //   const thisPathcomputer = this;
+  //   console.log('start cell', start);
+  //   let currentCell = start;
+  //   if(!currentCell.classList.contains(classNames.finish)){
+  //     currentCell.classList.add(classNames.visited);
+  //   }
+    
+  //   let cellsAdjacentToCurrentCell = prepareAdjacentCells(currentCell.dataset);
+  //   console.log('before filter', cellsAdjacentToCurrentCell);
+  //   cellsAdjacentToCurrentCell = cellsAdjacentToCurrentCell[0].filter(cell => cell !== null);
+  //   cellsAdjacentToCurrentCell = cellsAdjacentToCurrentCell.filter(cell => cell.classList.contains(classNames.selected) && !cell.classList.contains(classNames.visited));
+  //   console.log('after filter', cellsAdjacentToCurrentCell);
+  //   thisPathcomputer.paths.push(cellsAdjacentToCurrentCell);
+  //   console.log('paths after iteration', thisPathcomputer.paths);
+  //   cellsAdjacentToCurrentCell.forEach(cell => {
+  //     thisPathcomputer.computePaths(cell);
+  //   });
+    
+  //   console.log('paths are', thisPathcomputer.paths);
+    
+  //   return thisPathcomputer.paths;
+  // }
+  // generateRandomPath(start){
+  //   let currentCell = start;
+  //   let cellsAdjacentToCurrentCell = prepareAdjacentCells(currentCell.dataset);
+  //   console.log('before filter', cellsAdjacentToCurrentCell);
+  //   cellsAdjacentToCurrentCell = cellsAdjacentToCurrentCell[0].filter(cell => cell !== null);
+  //   cellsAdjacentToCurrentCell = cellsAdjacentToCurrentCell.filter(cell => cell.classList.contains(classNames.selected) && !cell.classList.contains(classNames.visited));
+  //   console.log('from random', cellsAdjacentToCurrentCell);
+  //   for(let i=0; i<cellsAdjacentToCurrentCell.length; i++){
+  //     console.log('from while', cellsAdjacentToCurrentCell.length);
+  //     currentCell.classList.add(classNames.visited);
+  //     let nextCell = cellsAdjacentToCurrentCell[Math.floor(Math.random() * cellsAdjacentToCurrentCell.length)];
+  //     this.randomPath.push(nextCell);
+  //     currentCell = nextCell;
+  //     this.generateRandomPath(nextCell);
+  //   }
+  //   console.log('here is a random path', this.randomPath);
+  //   return;
+  // }
+
+  createMatrixRepresentationOfPathFinder(){
     const thisPathcomputer = this;
-    console.log('start cell', start);
-    let currentCell = start;
-    if(!currentCell.classList.contains(classNames.finish)){
-      currentCell.classList.add(classNames.visited);
+    let matrix = new Array(10).fill([]);
+    for(let i=0; i<10; i++){
+      let matchingCells = Array.from(thisPathcomputer.dom.cells).filter(cell => parseInt(cell.dataset.row) === i+1);
+      console.log(matchingCells);
+      matrix[i] = matchingCells;
     }
-    
-    let cellsAdjacentToCurrentCell = prepareAdjacentCells(currentCell.dataset);
-    console.log('before filter', cellsAdjacentToCurrentCell);
-    cellsAdjacentToCurrentCell = cellsAdjacentToCurrentCell[0].filter(cell => cell !== null);
-    cellsAdjacentToCurrentCell = cellsAdjacentToCurrentCell.filter(cell => cell.classList.contains(classNames.selected) && !cell.classList.contains(classNames.visited));
-    console.log('after filter', cellsAdjacentToCurrentCell);
-    thisPathcomputer.paths.push(cellsAdjacentToCurrentCell);
-    console.log('paths after iteration', thisPathcomputer.paths);
-    cellsAdjacentToCurrentCell.forEach(cell => {
-      thisPathcomputer.computePaths(cell);
-    });
-    
-    console.log('paths are', thisPathcomputer.paths);
-    return thisPathcomputer.paths;
-  }
-  indicateShortestPath(paths){
-    const thisPathcomputer = this;
-    thisPathcomputer.shortestDistance = paths.map(path => path.some(cell => cell.classList.contains(classNames.finish))).indexOf(true) + 1;
-    thisPathcomputer.longestDistance = paths.map(path => path.some(cell => cell.classList.contains(classNames.finish))).indexOf(true, -1) + 1;
-    console.log('the first occurence of finish is in arr', thisPathcomputer.shortestDistance, thisPathcomputer.longestDistance);
-    paths.forEach(path => {
-      if(paths.indexOf(path) < thisPathcomputer.shortestDistance && path.length > 0){
-        thisPathcomputer.shortestPath.push(path[0]);
+    console.log('before zero', matrix);
+    matrix = matrix.map(row => row.map(cell => {
+      if(cell.classList.contains(classNames.selected)){
+        return 0;
+      }else{
+        return 1;
       }
-    });
-    console.log('the sectors to go are', thisPathcomputer.shortestPath);
+    }));
+    const startFinish = thisPathcomputer.identifyStartAndFinish(thisPathcomputer.dom.cells);
+    matrix[startFinish[1][0] - 1][startFinish[1][1] - 1] = 2;
+    console.log('matrix, start, finish', matrix, startFinish[0], startFinish[1]);
+    return [matrix, startFinish[0], startFinish[1]];    
   }
+
+  highlightTheShortestPath(path){
+    const thisPathcomputer = this;
+    for(let item of path.slice(1)){
+      console.log('item', item);
+      Array.from(thisPathcomputer.dom.cells).forEach(cell => {
+        if(parseInt(cell.dataset.row) == item[1][0] + 1 && parseInt(cell.dataset.column) == item[1][1] + 1){
+          cell.classList.add(classNames.shortest);
+        }
+      });
+    }
+  }
+  
+  identifyStartAndFinish(cells){
+    let start, finish;
+    for(let cell of Array.from(cells)){
+      if(cell.classList.contains(classNames.start)){
+        start = [parseInt(cell.dataset.row), parseInt(cell.dataset.column)];
+      }
+      if(cell.classList.contains(classNames.finish)){
+        finish = [parseInt(cell.dataset.row), parseInt(cell.dataset.column)];
+      }
+    }
+    return [start, finish];
+  }
+
 }
 
 export default Pathcomputer;

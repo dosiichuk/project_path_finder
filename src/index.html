@@ -40,7 +40,7 @@
             <a href="#" class="button-stage">End drawing</a>
         </section>
     </div>
-    <div class="modal-wrapper"></div>
+    <div class="modal-wrapper hidden"></div>
     <div class="copyright">
         All rights reserved
     </div>
@@ -75,16 +75,13 @@
         
     </script>
     <script id="template-modal" type="text/x-handlebars-template">
-        <div class="modal__container">
-            <section class="modal__content">
-                <h1 class="section-title">SUMMARY</h1>
-                <h2 class="section-subtitle">THE FULL ROUTE: <span class="modal__span">{{fullRoute}}</span> FIELDS</h2>
-                <h2 class="section-subtitle">THE LONGEST ROUTE: <span class="modal__span">{{longestDistance}}</span> FIELDS</h2>
-                <h2 class="section-subtitle">THE SHORTEST ROUTE: <span class="modal__span">{{shortestDistance}}</span> FIELDS</h2>
-                <button class="modal__close">X</button>
-            </section>
-            
-        </div>
+        <section class="modal__content">
+            <h1 class="section-title">SUMMARY</h1>
+            <h2 class="section-subtitle">THE FULL ROUTE: <span class="modal__span">{{fullRoute}}</span> FIELDS</h2>
+            <h2 class="section-subtitle">THE LONGEST ROUTE: <span class="modal__span">{{longestDistance}}</span> FIELDS</h2>
+            <h2 class="section-subtitle">THE SHORTEST ROUTE: <span class="modal__span">{{shortestDistance}}</span> FIELDS</h2>
+            <button class="modal__close">X</button>
+        </section>
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
