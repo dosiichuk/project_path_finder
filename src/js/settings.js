@@ -1,3 +1,7 @@
+export const appSettings = {
+  numberOfPathSimulations: 5,
+};
+
 export const select = {
   templateOf:{
     homePage: '#template-home',

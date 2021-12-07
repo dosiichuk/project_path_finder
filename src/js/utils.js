@@ -26,3 +26,11 @@ export const prepareAdjacentCells = function(dataset){
   const cornerCells = [cellTopLeft, cellTopRight, cellBottomRight, cellBottomLeft];
   return [adjacentCells, cornerCells];
 };
+
+export const intersection = function(a, b) {
+  if(a.length == 0 || b.lenth == 0) return false;
+  for(let el in a){
+    if(b.includes(el)) return true;
+  }
+  return false;
+};

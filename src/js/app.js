@@ -75,7 +75,6 @@ class App {
         this.stage = 1;
         this.updateAppView(this.stage);
         this.renderPathfinder();
-        console.log(this.changeStageButton);
       }
     });
   }
