@@ -85,8 +85,7 @@ class Pathfinder{
       });
     }
   }
-  checkForBreak([adjacentCells, cornerCells]){
-    console.log('inside checkforbreask, corner cells', cornerCells);
+  checkForBreak([adjacentCells]){
     adjacentCells = adjacentCells.filter(cell => cell !== null);
     //this function check whether two of the adjacent cells are selected, while the two remaining are not
     if((adjacentCells[0].classList.contains(classNames.selected) && 
