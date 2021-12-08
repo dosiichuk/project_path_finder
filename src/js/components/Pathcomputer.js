@@ -1,7 +1,8 @@
 import {appSettings, classNames, select} from '../settings.js';
 import {prepareAdjacentCells} from '../utils.js';
 import Modal from './Modal.js';
-import {findTheShortestPath} from './FinderFunction.js';
+// import {findTheShortestPath} from './FinderFunction.js';
+import {intersection} from '../utils.js';
 
 class Pathcomputer{
   constructor(stage){
@@ -35,18 +36,27 @@ class Pathcomputer{
       for(let numSim = 0; numSim <= appSettings.numberOfPathSimulations; numSim++){
         thisPathcomputer.generateRandomPath(start);
       }
-      const pathInvolvingFinish = thisPathcomputer.randomPaths.filter(path => path.some(cell => cell.classList.contains(classNames.finish)));
-
-      const [matrix, startCoords, finishCoords] = thisPathcomputer.createMatrixRepresentationOfPathFinder();
-      thisPathcomputer.shortestPath = findTheShortestPath(matrix, startCoords, finishCoords);
+      const cellsAdjacentToStart = prepareAdjacentCells(start.dataset)[0];
+      const pathInvolvingFinish = thisPathcomputer.randomPaths.filter(path => {
+        const match = intersection(path, cellsAdjacentToStart);
+        if(match && path.some(cell => cell.classList.contains(classNames.finish))) return true;
+      });
+      console.log(pathInvolvingFinish);
       
-      thisPathcomputer.highlightTheShortestPath(thisPathcomputer.shortestPath);
-      thisPathcomputer.shortestDistance = thisPathcomputer.shortestPath.length - 1;
+      //Alternative approach to the calculation of the shortest path using Graph traversal
+      // const [matrix, startCoords, finishCoords] = thisPathcomputer.createMatrixRepresentationOfPathFinder();
+      // thisPathcomputer.shortestPath = findTheShortestPath(matrix, startCoords, finishCoords);
+      
+      // thisPathcomputer.highlightTheShortestPath(thisPathcomputer.shortestPath);
+      // thisPathcomputer.shortestDistance = thisPathcomputer.shortestPath.length - 1;
 
       const pathLength = pathInvolvingFinish.map(path => path.length);
       
       thisPathcomputer.longestPath = pathInvolvingFinish[pathLength.indexOf(Math.max(...pathLength))];
+      thisPathcomputer.shortestPath = pathInvolvingFinish[pathLength.indexOf(Math.min(...pathLength))];
       thisPathcomputer.longestDistance = thisPathcomputer.longestPath.length;
+      thisPathcomputer.shortestDistance = thisPathcomputer.shortestPath.length;
+      thisPathcomputer.highlightTheShortestPath(thisPathcomputer.shortestPath);
       thisPathcomputer.fullRoute = document.getElementsByClassName(classNames.selected).length;
       new Modal(document.querySelector(select.wrapperOf.modal), thisPathcomputer.fullRoute, thisPathcomputer.longestDistance, thisPathcomputer.shortestDistance);
     }    
@@ -121,14 +131,21 @@ class Pathcomputer{
     return [matrix, startFinish[0], startFinish[1]];    
   }
 
+  //This fuction should be used only is Graph traversal is chosen as a way to look for the shortest path
+  // highlightTheShortestPath(path){
+  //   const thisPathcomputer = this;
+  //   for(let item of path.slice(1)){
+  //     Array.from(thisPathcomputer.dom.cells).forEach(cell => {
+  //       if(parseInt(cell.dataset.row) == item[1][0] + 1 && parseInt(cell.dataset.column) == item[1][1] + 1){
+  //         cell.classList.add(classNames.shortest);
+  //       }
+  //     });
+  //   }
+  // }
+
   highlightTheShortestPath(path){
-    const thisPathcomputer = this;
-    for(let item of path.slice(1)){
-      Array.from(thisPathcomputer.dom.cells).forEach(cell => {
-        if(parseInt(cell.dataset.row) == item[1][0] + 1 && parseInt(cell.dataset.column) == item[1][1] + 1){
-          cell.classList.add(classNames.shortest);
-        }
-      });
+    for(let cell of path.slice(0, path.length - 1)){
+      cell.classList.add(classNames.shortest);
     }
   }
   

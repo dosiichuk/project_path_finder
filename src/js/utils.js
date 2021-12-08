@@ -29,8 +29,12 @@ export const prepareAdjacentCells = function(dataset){
 
 export const intersection = function(a, b) {
   if(a.length == 0 || b.lenth == 0) return false;
-  for(let el in a){
-    if(b.includes(el)) return true;
+  for(let el of a){
+    for(let cell of b){
+      if(el.dataset == cell.dataset){
+        return true;
+      }
+    }
   }
   return false;
 };
